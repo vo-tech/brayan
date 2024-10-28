@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brayan Barbershop - Barbearia Premium em Barreiras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            /* Nova paleta de cores premium e harmoniosa */
+            --primary: #1A1A1A;          /* Preto suave para base */
+            --secondary: #D4AF37;        /* Dourado mais refinado */
+            --dark-1: #1E1E1E;          /* Preto suave para primeira seção */
+            --dark-2: #242424;          /* Preto médio para segunda seção */
+            --dark-3: #2A2A2A;          /* Preto mais claro para terceira seção */
+            --dark-4: #303030;          /* Tom mais claro para quarta seção */
+            --text: #FFFFFF;            /* Texto branco */
+            --text-muted: #CCCCCC;      /* Texto secundário */
+            --accent-hover: #E5C158;    /* Dourado mais claro para hover */
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        header {
+            background: rgba(26, 26, 26, 0.65);  /* Alterado para 0.65 (65% opaco) */
+            padding: 1.2rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            color: var(--secondary);  /* Agora todo o texto do logo será dourado */
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .logo-accent {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-button {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .services {
+            background: var(--dark-1);
+            padding: 5rem 1rem;
+            color: var(--text);
+        }
+
+        .services-container {
+            max-width: 800px;  /* Reduzido de 1200px para um layout mais compacto */
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);  /* Alterado para 2 colunas */
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 100%;  /* Garante que os cards não ultrapassem o container */
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .hours {
+            background: var(--dark-3);
+            padding: 3rem 1rem;
+            color: var(--text);
+        }
+
+        .hours-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hours h2 {
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hours p {
+            margin-bottom: 0.5rem;
+        }
+
+        .location {
+            background: var(--dark-4);
+            padding: 3rem 1rem;
+            color: var(--text);
+        }
+
+        .location-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .location h2 {
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .services {
+                padding: 3rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-button {
+                display: block;
+                color: var(--white);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+
+        /* Atualizando as cores de fundo das seções */
+        .hero {
+            /* mantém o background com imagem */
+        }
+
+        .services {
+            background: var(--dark-1);
+            padding: 5rem 1rem;
+            color: var(--text);
+        }
+
+        .about {
+            background: var(--dark-2);
+            padding: 5rem 1rem;
+            color: var(--text);
+        }
+
+        .hours {
+            background: var(--dark-3);
+            padding: 3rem 1rem;
+            color: var(--text);
+        }
+
+        .location {
+            background: var(--dark-4);
+            padding: 3rem 1rem;
+            color: var(--text);
+        }
+
+        /* Atualizando cores dos títulos e cards */
+        .services h2,
+        .about h2,
+        .hours h2,
+        .location h2 {
+            color: var(--secondary);
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .service-card h3 {
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--secondary);
+        }
+
+        /* Atualizando títulos das seções */
+        .services h2,
+        .about h2,
+        .hours h2,
+        .location h2 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .services h2::after,
+        .about h2::after,
+        .hours h2::after,
+        .location h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* Atualizando textos */
+        p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Ajuste para telas menores */
+        @media (max-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr;  /* Uma coluna em telas pequenas */
+            }
+        }
+
+        /* Estilo geral para todos os containers */
+        .services-container,
+        .about-container,
+        .hours-container,
+        .location-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        /* Ajuste do hero */
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Ajuste dos serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Ajuste dos parágrafos */
+        p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 600px;  /* Largura máxima para melhor legibilidade */
+        }
+
+        /* Ajuste dos títulos */
+        .services h2,
+        .about h2,
+        .hours h2,
+        .location h2 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 3rem;
+        }
+
+        /* Ajuste do footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-text">
+                    <span class="logo-accent">Brayan</span> Barbershop
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#services">Serviços</a>
+                <a href="#about">Sobre</a>
+                <a href="#hours">Horários</a>
+                <a href="#location">Localização</a>
+                <a href="https://wa.me/557781553951" class="nav-button">Agendar</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Brayan Barbershop</h1>
+            <p>13 Anos de Excelência em Barbearia</p>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="services-container">
+            <h2>Nossos Serviços</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Corte</h3>
+                    <p>R$ 30</p>
+                </div>
+                <div class="service-card">
+                    <h3>Barba</h3>
+                    <p>R$ 20</p>
+                </div>
+                <div class="service-card">
+                    <h3>Sobrancelha Simples</h3>
+                    <p>R$ 15</p>
+                </div>
+                <div class="service-card">
+                    <h3>Designer na Henna</h3>
+                    <p>R$ 40</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-container">
+            <h2>Sobre Nós</h2>
+            <p>Com mais de 13 anos de experiência, a Brayan Barbershop se destaca pela excelência em serviços de barbearia em Barreiras.</p>
+            <p>Nossa equipe altamente qualificada está comprometida em proporcionar o melhor atendimento e resultados excepcionais para nossos clientes.</p>
+        </div>
+    </section>
+
+    <section id="hours" class="hours">
+        <div class="hours-container">
+            <h2>Horário de Funcionamento</h2>
+            <p>Segunda a Sábado: 9h às 21h</p>
+            <p>Domingo: 9h às 14h</p>
+            <p>Av. Castelo Branco, 829-765 - Vila Brasil, Barreiras - BA</p>
+        </div>
+    </section>
+
+    <section id="location" class="location">
+        <div class="location-container">
+            <h2>Nossa Localização</h2>
+            <p>Av. Castelo Branco, 829-765</p>
+            <p>Vila Brasil, Barreiras - BA</p>
+        </div>
+    </section>
+
+    <a href="https://wa.me/557781553951" target="_blank" class="whatsapp-button">
+        <svg fill="#fff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.787 23.5l4.466-1.497A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.18 0-4.204-.705-5.835-1.897l-4.274 1.434 1.434-4.274A9.937 9.937 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10zm5.75-13.5c-.312-.528-1.003-.847-2.122-.985-.346-.042-.755-.062-1.216-.062-.752 0-1.505.115-2.26.345-.566.173-1.085.413-1.558.72-.472.308-.872.673-1.2 1.095-.33.422-.494.854-.494 1.296 0 .44.164.872.494 1.294.328.422.728.787 1.2 1.095.473.307.992.547 1.558.72.755.23 1.508.345 2.26.345.46 0 .87-.02 1.216-.062 1.12-.138 1.81-.457 2.122-.985.208-.352.312-.72.312-1.103 0-.382-.104-.75-.312-1.102z"/>
+        </svg>
+    </a>
+
+    <footer>
+        <p>© 2024 Brayan Barbershop. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
